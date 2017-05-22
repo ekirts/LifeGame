@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		916A733E1ED36357008DEB92 /* LifeBoardUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916A733D1ED36357008DEB92 /* LifeBoardUpdater.swift */; };
 		9197F5F01ED34D8800264E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197F5EF1ED34D8800264E23 /* AppDelegate.swift */; };
 		9197F5F21ED34D8800264E23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197F5F11ED34D8800264E23 /* ViewController.swift */; };
 		9197F5F51ED34D8800264E23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9197F5F31ED34D8800264E23 /* Main.storyboard */; };
 		9197F5F71ED34D8800264E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9197F5F61ED34D8800264E23 /* Assets.xcassets */; };
 		9197F5FA1ED34D8800264E23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9197F5F81ED34D8800264E23 /* LaunchScreen.storyboard */; };
+		9197F6021ED3555A00264E23 /* LifeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197F6011ED3555A00264E23 /* LifeBoardView.swift */; };
+		9197F6061ED3559500264E23 /* LifeBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197F6051ED3559500264E23 /* LifeBoardModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		916A733D1ED36357008DEB92 /* LifeBoardUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeBoardUpdater.swift; sourceTree = "<group>"; };
 		9197F5EC1ED34D8800264E23 /* LifeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9197F5EF1ED34D8800264E23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9197F5F11ED34D8800264E23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		9197F5F61ED34D8800264E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9197F5F91ED34D8800264E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9197F5FB1ED34D8800264E23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9197F6011ED3555A00264E23 /* LifeBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeBoardView.swift; sourceTree = "<group>"; };
+		9197F6051ED3559500264E23 /* LifeBoardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeBoardModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 			children = (
 				9197F5EF1ED34D8800264E23 /* AppDelegate.swift */,
 				9197F5F11ED34D8800264E23 /* ViewController.swift */,
+				9197F6011ED3555A00264E23 /* LifeBoardView.swift */,
+				916A733D1ED36357008DEB92 /* LifeBoardUpdater.swift */,
+				9197F6051ED3559500264E23 /* LifeBoardModel.swift */,
 				9197F5F31ED34D8800264E23 /* Main.storyboard */,
 				9197F5F61ED34D8800264E23 /* Assets.xcassets */,
 				9197F5F81ED34D8800264E23 /* LaunchScreen.storyboard */,
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9197F6061ED3559500264E23 /* LifeBoardModel.swift in Sources */,
 				9197F5F21ED34D8800264E23 /* ViewController.swift in Sources */,
+				9197F6021ED3555A00264E23 /* LifeBoardView.swift in Sources */,
 				9197F5F01ED34D8800264E23 /* AppDelegate.swift in Sources */,
+				916A733E1ED36357008DEB92 /* LifeBoardUpdater.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +316,7 @@
 				9197F6001ED34D8800264E23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
