@@ -21,6 +21,7 @@ class LifeBoardView: UIView {
     
     private let model: LifeBoardModel
     private var cells: [String: Cell] = [:]
+    private var width = 0
     
     // MARK: - Lifecycle
     
@@ -29,7 +30,7 @@ class LifeBoardView: UIView {
         
         super.init(frame: frame)
         
-        createDesk()
+        createDesk(model: model)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,21 +41,31 @@ class LifeBoardView: UIView {
     
     func clearAll() {
         cells.forEach { (cell) in
-            cell.value.view.backgroundColor = UIColor.clear
+            cell.value.view.removeFromSuperview()
         }
+        cells.removeAll()
     }
     
-    func updateCellFor(coordinates: [Coordinate]) {
-        coordinates.forEach { (coordinate) in
-            cells["\(coordinate.x)\(coordinate.y)"]?.coordinate.isLife = coordinate.isLife
-            cells["\(coordinate.x)\(coordinate.y)"]?.view.backgroundColor = coordinate.isLife ? UIColor.black : UIColor.white
+    func updateDesk(model: [Coordinate]) {
+        clearAll()
+        
+        model.forEach { (coordinate) in
+            if coordinate.isLife {
+                let frame = CGRect(x: coordinate.x * width, y: coordinate.y * width, width: width, height: width)
+                let cell = UIView(frame: frame)
+                cell.backgroundColor = UIColor.black
+                
+                cells["\(coordinate.x)-\(coordinate.y)"] = Cell(coordinate: coordinate, view: cell)
+                
+                addSubview(cell)
+            }
         }
     }
     
     // MARK: - Private Methods
     
-    private func createDesk() {
-        let size: Int = {
+    private func createDesk(model: LifeBoardModel) {
+        width = {
             if (Int(bounds.width) / model.xCount) > (Int(bounds.height) / model.yCount) {
                 return Int(bounds.height) / model.yCount
             } else {
@@ -63,12 +74,15 @@ class LifeBoardView: UIView {
         }()
         
         model.coordinates.forEach { (coordinate) in
-            let frame = CGRect(x: coordinate.value.x * size, y: coordinate.value.y * size, width: size, height: size)
-            let cell = UIView(frame: frame)
-            cell.backgroundColor = coordinate.value.isLife ? UIColor.black : UIColor.white
-            cells["\(coordinate.value.x)\(coordinate.value.y)"] = Cell(coordinate: coordinate.value, view: cell)
+            if coordinate.value.isLife {
+                let frame = CGRect(x: coordinate.value.x * width, y: coordinate.value.y * width, width: width, height: width)
+                let cell = UIView(frame: frame)
+                cell.backgroundColor = UIColor.black
                 
-            addSubview(cell)
+                cells["\(coordinate.value.x)-\(coordinate.value.y)"] = Cell(coordinate: coordinate.value, view: cell)
+                
+                addSubview(cell)
+            }
         }
     }
 

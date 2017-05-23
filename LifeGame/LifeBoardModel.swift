@@ -10,10 +10,20 @@ import Foundation
 
 // MARK: - Coordinate
 
-struct Coordinate {
+struct Coordinate: Hashable {
     let x: Int
     let y: Int
     var isLife: Bool
+    
+    public var hashValue: Int {
+        get {
+            return "\(self.x),\(self.y)".hashValue
+        }
+    }
+    
+    static func ==(lhs: Coordinate, rhs: Coordinate) -> Bool {
+        return lhs.hashValue == rhs.hashValue 
+    }
 }
 
 // MARK: - LifeBoardModel
@@ -22,7 +32,7 @@ class LifeBoardModel {
     
     // MARK: - Public Properties
     
-    let coordinates: [String: Coordinate]
+    var coordinates: [String: Coordinate]
     let xCount: Int
     let yCount: Int
     
@@ -35,7 +45,7 @@ class LifeBoardModel {
         var coordinate: [String: Coordinate] = [:]
         for xCoordinate in 0...x {
             for yCoordinate in 0...y {
-                coordinate["\(xCoordinate)\(yCoordinate)"] = Coordinate(x: xCoordinate, y: yCoordinate, isLife: (arc4random() % 12) == 1)
+                coordinate["\(xCoordinate)-\(yCoordinate)"] = Coordinate(x: xCoordinate, y: yCoordinate, isLife: false)
             }
         }
         self.coordinates = coordinate
@@ -43,21 +53,23 @@ class LifeBoardModel {
     
     // MARK: - Public Methods
     
-    func nearCellForCoordinate(coordinate: Coordinate) -> [Coordinate] {
+    func nearCellForCoordinate(coordinate: Coordinate, coordinatesBoard: [String: Coordinate]) -> [Coordinate] {
         var coordinates: [Coordinate] = []
-        coordinates.append(coordinateInBoard(x: coordinate.x - 1,   y: coordinate.y - 1))
-        coordinates.append(coordinateInBoard(x: coordinate.x,       y: coordinate.y - 1))
-        coordinates.append(coordinateInBoard(x: coordinate.x + 1,   y: coordinate.y - 1))
-        coordinates.append(coordinateInBoard(x: coordinate.x - 1,   y: coordinate.y))
-        coordinates.append(coordinateInBoard(x: coordinate.x - 1,   y: coordinate.y + 1))
-        coordinates.append(coordinateInBoard(x: coordinate.x + 1,   y: coordinate.y))
-        coordinates.append(coordinateInBoard(x: coordinate.x,       y: coordinate.y + 1))
-        coordinates.append(coordinateInBoard(x: coordinate.x + 1,   y: coordinate.y + 1))
+        
+        coordinates.append(coordinateInBoard(x: coordinate.x - 1, y: coordinate.y - 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x,     y: coordinate.y - 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x + 1, y: coordinate.y - 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x - 1, y: coordinate.y, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x - 1, y: coordinate.y + 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x + 1, y: coordinate.y, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x,     y: coordinate.y + 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x + 1, y: coordinate.y + 1, coordinatesBoard: coordinatesBoard))
+        coordinates.append(coordinateInBoard(x: coordinate.x, y: coordinate.y, coordinatesBoard: coordinatesBoard))
         
         return coordinates
     }
     
-    func coordinateInBoard(x: Int, y: Int) -> Coordinate {
+    func coordinateInBoard(x: Int, y: Int, coordinatesBoard: [String: Coordinate]) -> Coordinate {
         var coordinate = (x, y)
         if x < 0 {
             coordinate.0 = xCount
@@ -70,7 +82,7 @@ class LifeBoardModel {
             coordinate.1 = 0
         }
         
-        return Coordinate(x: coordinate.0, y: coordinate.1, isLife: coordinates["\(coordinate.0)\(coordinate.1)"]?.isLife ?? false)
+        return Coordinate(x: coordinate.0, y: coordinate.1, isLife: coordinatesBoard["\(coordinate.0)-\(coordinate.1)"]?.isLife ?? false)
     }
     
 }

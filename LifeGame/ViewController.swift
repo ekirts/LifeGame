@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     }
     
     func boardUpdate(coordinates: [Coordinate]) {
-        boardView.updateCellFor(coordinates: coordinates)
+        boardView.updateDesk(model: coordinates)
     }
 
     // MARK: - Actions
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func birdAction(_ sender: Any) {
-        
+        updater.addRandomLife()
     }
     
     @IBAction private func stopAction(_ sender: Any) {
@@ -73,6 +73,10 @@ class ViewController: UIViewController {
     
     @IBAction private func playAction(_ sender: Any) {
         updater.startUpdate()
+    }
+    
+    @IBAction private func addlife(_ sender: Any) {
+        updater.addLife()
     }
     
 }
